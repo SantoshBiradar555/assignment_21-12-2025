@@ -15,7 +15,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/De'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/Dev'
     backendServiceArm: 'infra_sc'
     backendAzureRmStorageAccountName: 'todostoragesantosh'
     backendAzureRmContainerName: 'todocontainer'
