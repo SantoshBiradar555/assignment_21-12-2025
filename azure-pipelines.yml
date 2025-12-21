@@ -1,7 +1,7 @@
 name: infrapipeline
 
-trigger:
-- main
+trigger: none
+
 pool:
   name: infraassignment_agentpool
 
