@@ -1,29 +1,18 @@
+name: infrapipeline
+
 trigger:
 - main
+pool:
+  name: infraassignment_agentpool
 
-pool:infraassignment_agentpool
+steps:
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/De'
+    backendServiceArm: 'infra_sc'
+    backendAzureRmStorageAccountName: 'todostoragesantosh'
+    backendAzureRmContainerName: 'todocontainer'
+    backendAzureRmKey: 'dev.terraform.tfstate'
 
-
-stages:
-  - stage: build
-    jobs:
-      - job: initvalidateplan
-        displayName: initvalidateplan
-        steps:
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            backendServiceArm: 'infra_serviceconnecton'
-            backendAzureRmStorageAccountName: 'todostoragesantosh'
-            backendAzureRmContainerName: 'todocontainer'
-            backendAzureRmKey: 'dev.terraform.tfstate'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'validate'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-            environmentServiceNameAzureRM: 'infra_serviceconnecton'
