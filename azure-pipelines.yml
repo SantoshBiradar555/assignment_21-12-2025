@@ -6,7 +6,7 @@ pool:
   name: infra_pipeline_3012
 
 stages:
-  - stage: 
+  - stage: init_validate_plan
     jobs:
       - job: 
         displayName: init_validate_plan
@@ -23,3 +23,17 @@ stages:
             backendAzureRmStorageAccountName: 'infrapipeline3012'
             backendAzureRmContainerName: 'infrapipeline3012'
             backendAzureRmKey: 'terraform.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            environmentServiceNameAzureRM: 'infra_pipeline_3012_serviceconnection'
+
+  - stage: scanning 
+    jobs:
+      - job: 
+        displayName: init_validate_plan
+        steps:
+        - task: tfsec@1
+          inputs:
+            version: 'v1.26.0'
