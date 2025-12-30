@@ -44,9 +44,10 @@ stages:
       - job: 
         displayName: costoptimizationjob
         steps:
-        - script: |
-            curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh
-            infracost breakdown --path . --format table
+        - powershell: |
+            iwr https://infracost.io/downloads/latest/infracost-windows-amd64.zip -OutFile infracost.zip
+            Expand-Archive infracost.zip -DestinationPath .
+            .\infracost.exe breakdown --path . --format table
           env:
             INFRACOST_API_KEY: "ico-OGKQstEE7TABhSe8FMvn0ZGRzEv5nihO"
           displayName: Infracost Cost Check
