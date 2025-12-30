@@ -6,14 +6,15 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "todo_assignment"
-    storage_account_name = "todostoragesantosh"
-    container_name       = "todocontainer"
-    key                  = "dev.terraform.tfstate"
+    resource_group_name  = "infra_pipeline_3012"
+    storage_account_name = "infrapipeline3012"
+    container_name       = "infrapipeline3012"
+    key                  = "terraform.tfstate"
   }
 }
 
 provider "azurerm" {
   features {}
-  subscription_id = "e5476362-58a0-48f7-8197-5aa05a4abfa5"
+  subscription_id = "1b05e470-de80-481a-8feb-07829124ebd9"
+
 }
