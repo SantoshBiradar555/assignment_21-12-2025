@@ -39,9 +39,14 @@ stages:
         - task: tfsec@1
           inputs:
             version: 'v1.26.0'
-    stage: costoptimization
+  - stage: costoptimization
     jobs:
       - job: 
         displayName: costoptimizationjob
         steps:
-        
+        - script: |
+            curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh
+            infracost breakdown --path . --format table
+          env:
+            INFRACOST_API_KEY: "ico-OGKQstEE7TABhSe8FMvn0ZGRzEv5nihO"
+          displayName: Infracost Cost Check
